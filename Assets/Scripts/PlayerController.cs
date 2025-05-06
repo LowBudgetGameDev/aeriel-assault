@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
 
         transform.position += transform.up * movementSpeed * Time.deltaTime;
 
-        transform.Rotate(0f, 0f, movementInput.x * turnSpeed);
+        transform.Rotate(0f, 0f, movementInput.x * -turnSpeed);
     }
 
     private void Shoot()
