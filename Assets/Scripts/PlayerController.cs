@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,26 +7,18 @@ public class PlayerController : MonoBehaviour
     private float movementSpeed = 10f;
     private float turnSpeed = 1f;
 
-    private InputSystem_Actions inputActions;
-
-    private void Awake()
-    {
-        inputActions = new InputSystem_Actions();
-        inputActions.Player.Enable();
-
-        inputActions.Player.Shoot.performed += (InputAction.CallbackContext obj) =>
-        {
-            Shoot();
-        };
-    }
-
     private void Update()
     {
-        Vector3 movementInput = inputActions.Player.Move.ReadValue<Vector2>();
+        float movementInput = Input.GetAxisRaw("Horizontal");
 
         transform.position += transform.up * movementSpeed * Time.deltaTime;
 
-        transform.Rotate(0f, 0f, movementInput.x * -turnSpeed);
+        transform.Rotate(0f, 0f, movementInput * -turnSpeed);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Shoot();
+        }
     }
 
     private void Shoot()
