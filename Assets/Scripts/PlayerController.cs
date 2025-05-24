@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Transform bulletPrefab;
 
     private float movementSpeed = 10f;
-    private float turnSpeed = 1f;
+    private float turnSpeed = 180f;
 
     private void Update()
     {
@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
         transform.position += transform.up * movementSpeed * Time.deltaTime;
 
-        transform.Rotate(0f, 0f, movementInput * -turnSpeed);
+        transform.Rotate(0f, 0f, movementInput * -turnSpeed * Time.deltaTime);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
