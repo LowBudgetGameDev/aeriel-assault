@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7267408661624230580}
   - component: {fileID: 6557835691430185630}
   - component: {fileID: 4564848152153463896}
+  - component: {fileID: -5774914788563588162}
   m_Layer: 6
   m_Name: EnemyBasic
   m_TagString: Untagged
@@ -107,6 +108,23 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!114 &-5774914788563588162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430075468057316475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a77e104bd5f9f734fb77cbafc48d82d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 2882000085527933400, guid: d48b24da85d085746b40ad2d41df299b, type: 3}
+  movementSpeed: 8
+  turnSpeed: 135
+  shootTime: 0.5
+  playerTransform: {fileID: 0}
 --- !u!1 &4115131499014477836
 GameObject:
   m_ObjectHideFlags: 0

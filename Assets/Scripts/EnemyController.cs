@@ -10,25 +10,31 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] private Transform playerTransform;
 
+    private float shootTimer;
 
-    //private void Update()
-    //{
+    private void Update()
+    {
+        float cross = UtilsClass.CrossProduct(transform.up, playerTransform.position - transform.position);
 
+        int rotateDir = cross > 0 ? -1 : 1;
 
-    //    transform.position += transform.up * movementSpeed * Time.deltaTime;
+        transform.position += transform.up * movementSpeed * Time.deltaTime;
 
-    //    transform.Rotate(0f, 0f, movementInput * -turnSpeed * Time.deltaTime);
+        transform.Rotate(0f, 0f, rotateDir * -turnSpeed * Time.deltaTime);
 
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        Shoot();
-    //    }
-    //}
+        shootTimer -= Time.deltaTime;
 
-    //private void Shoot()
-    //{
-    //    Transform bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        if (shootTimer < 0f)
+        {
+            Shoot();
+            shootTimer += shootTime;
+        }
+    }
 
-    //    bullet.GetComponent<Bullet>().Setup(transform.up);
-    //}
+    private void Shoot()
+    {
+        Transform bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+
+        bullet.GetComponent<Bullet>().Setup(transform.up);
+    }
 }
