@@ -5,7 +5,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private Transform bulletPrefab;
 
     [SerializeField] private float movementSpeed = 10f;
-    [SerializeField] private float turnSpeed = 180f;
+    [SerializeField] private float turnSpeed = 90f;
     [SerializeField] private float shootTime = 0.5f;
 
     [SerializeField] private Transform playerTransform;
