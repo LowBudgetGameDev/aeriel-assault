@@ -122,8 +122,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2882000085527933400, guid: d48b24da85d085746b40ad2d41df299b, type: 3}
   movementSpeed: 8
-  turnSpeed: 45
+  turnSpeed: 180
   shootTime: 0.5
+  avoidanceRadius: 2
+  avoidanceStrength: 5
   playerTransform: {fileID: 0}
 --- !u!1 &4115131499014477836
 GameObject:
