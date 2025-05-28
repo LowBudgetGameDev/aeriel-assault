@@ -5,6 +5,7 @@ public class Bullet : MonoBehaviour
     private new Rigidbody2D rigidbody2D;
 
     private float speed = 20f;
+    private int damageAmount;
 
     private void Awake()
     {
@@ -13,8 +14,9 @@ public class Bullet : MonoBehaviour
         Destroy(gameObject, 5f);
     }
 
-    public void Setup(Vector2 dir)
+    public void Setup(Vector2 dir, int damageAmount)
     {
+        this.damageAmount = damageAmount;
         transform.up = dir;
 
         rigidbody2D.AddForce(dir * speed, ForceMode2D.Impulse);
@@ -22,6 +24,11 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.gameObject.TryGetComponent(out HealthSystem healthSystem))
+        {
+            healthSystem.Damage(damageAmount);
+        }
+
         Destroy(gameObject);
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6557835691430185630}
   - component: {fileID: 4564848152153463896}
   - component: {fileID: -5774914788563588162}
+  - component: {fileID: -7159384432109877040}
   m_Layer: 6
   m_Name: EnemyBasic
   m_TagString: Untagged
@@ -120,13 +121,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a77e104bd5f9f734fb77cbafc48d82d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 2882000085527933400, guid: d48b24da85d085746b40ad2d41df299b, type: 3}
+  bulletPrefab: {fileID: 2882000085527933400, guid: f87dd65074ba9e74f81623e28a4b209b, type: 3}
   movementSpeed: 8
   turnSpeed: 180
   shootTime: 0.5
+  damage: 200
   avoidanceRadius: 2
   avoidanceStrength: 5
+  targetTime: 5
   playerTransform: {fileID: 0}
+--- !u!114 &-7159384432109877040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 430075468057316475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee356d997d037b14aaccb463ac78bb73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1000
 --- !u!1 &4115131499014477836
 GameObject:
   m_ObjectHideFlags: 0

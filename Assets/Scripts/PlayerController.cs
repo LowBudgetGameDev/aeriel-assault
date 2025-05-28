@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 
     private float movementSpeed = 10f;
     private float turnSpeed = 180f;
+    private int damage = 250;
 
     private void Update()
     {
@@ -25,6 +26,6 @@ public class PlayerController : MonoBehaviour
     {
         Transform bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
-        bullet.GetComponent<Bullet>().Setup(transform.up);
+        bullet.GetComponent<Bullet>().Setup(transform.up, damage);
     }
 }

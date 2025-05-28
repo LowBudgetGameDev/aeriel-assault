@@ -7,6 +7,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private float movementSpeed = 10f;
     [SerializeField] private float turnSpeed = 90f;
     [SerializeField] private float shootTime = 0.5f;
+    [SerializeField] private int damage = 200;
 
     [SerializeField] private float avoidanceRadius = 2f;
     [SerializeField] private float avoidanceStrength = 5f;
@@ -17,6 +18,13 @@ public class EnemyController : MonoBehaviour
 
     private float shootTimer;
     private float targetTimer;
+
+    private Vector3 flyAwayDir;
+
+    private void Awake()
+    {
+        flyAwayDir = UtilsClass.RandomUnitVector();
+    }
 
     private void Update()
     {
@@ -74,7 +82,7 @@ public class EnemyController : MonoBehaviour
     {
         Transform bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
-        bullet.GetComponent<Bullet>().Setup(transform.up);
+        bullet.GetComponent<Bullet>().Setup(transform.up, damage);
     }
 
     private void FlyAway()
@@ -100,7 +108,7 @@ public class EnemyController : MonoBehaviour
             avoidance /= neighborCount;
         }
 
-        Vector3 defaultDir = Vector3.right;
+        Vector3 defaultDir = flyAwayDir;
 
         Vector3 moveDirection = (defaultDir - avoidance * avoidanceStrength).normalized;
 
