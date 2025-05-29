@@ -122,14 +122,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 2882000085527933400, guid: f87dd65074ba9e74f81623e28a4b209b, type: 3}
-  movementSpeed: 6
-  turnSpeed: 180
-  shootTime: 0.5
-  damage: 200
+  movementSpeed: 4
+  turnSpeed: 90
+  shootTime: 2
+  damage: 100
   avoidanceRadius: 2
   avoidanceStrength: 5
   targetTime: 7
-  playerTransform: {fileID: 0}
+  targetRange: 15
 --- !u!114 &-1614605739859110601
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,24 +2,34 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    [Header("Bullet")]
     [SerializeField] private Transform bulletPrefab;
 
+    [Header("Basic Info")]
     [SerializeField] private float movementSpeed = 10f;
     [SerializeField] private float turnSpeed = 90f;
     [SerializeField] private float shootTime = 0.5f;
     [SerializeField] private int damage = 200;
 
+    [Header("Avoidance Info")]
     [SerializeField] private float avoidanceRadius = 2f;
     [SerializeField] private float avoidanceStrength = 5f;
 
+    [Header("Target Info")]
     [SerializeField] private float targetTime = 5f;
+    [SerializeField] private float targetRange = 15f;
 
-    [SerializeField] private Transform playerTransform;
+    private Transform playerTransform;
 
     private float shootTimer;
     private float targetTimer;
 
     private Vector3 flyAwayDir;
+
+    public void Setup(Transform playerTransform)
+    {
+        this.playerTransform = playerTransform;
+    }
 
     private void Awake()
     {
@@ -28,6 +38,14 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
+        if (playerTransform == null) return;
+
+        if (Vector3.Distance(transform.position, playerTransform.position) > targetRange)
+        {
+            MoveToPlayer();
+            return;
+        }
+
         if (targetTimer > targetTime)
         {
             FlyAway();
@@ -36,6 +54,19 @@ public class EnemyController : MonoBehaviour
 
         targetTimer += Time.deltaTime;
 
+        MoveToPlayer();
+
+        shootTimer -= Time.deltaTime;
+
+        if (shootTimer < 0f)
+        {
+            Shoot();
+            shootTimer += shootTime;
+        }
+    }
+
+    private void MoveToPlayer()
+    {
         Vector3 avoidance = new Vector3();
         int neighborCount = 0;
 
@@ -68,14 +99,6 @@ public class EnemyController : MonoBehaviour
         transform.position += transform.up * movementSpeed * Time.deltaTime;
 
         transform.Rotate(0f, 0f, rotateDir * -turnSpeed * Time.deltaTime);
-
-        shootTimer -= Time.deltaTime;
-
-        if (shootTimer < 0f)
-        {
-            Shoot();
-            shootTimer += shootTime;
-        }
     }
 
     private void Shoot()
