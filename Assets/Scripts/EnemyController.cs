@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour
@@ -29,6 +30,11 @@ public class EnemyController : MonoBehaviour
     public void Setup(Transform playerTransform)
     {
         this.playerTransform = playerTransform;
+
+        GetComponent<HealthSystem>().OnDie += (object sender, EventArgs e) =>
+        {
+            ScoreManager.Instance.IncreaseScore();
+        };
     }
 
     private void Awake()
