@@ -8,6 +8,7 @@ public class HealthSystem : MonoBehaviour
     [SerializeField] private int maxHealth = 1000;
 
     private int health;
+    private bool isInvincible;
 
     private void Awake()
     {
@@ -16,6 +17,8 @@ public class HealthSystem : MonoBehaviour
 
     public void Damage(int amount)
     {
+        if (isInvincible) return;
+
         health -= amount;
         health = Mathf.Clamp(health, 0, maxHealth);
 
@@ -40,5 +43,14 @@ public class HealthSystem : MonoBehaviour
     public float GetHealthAmountNormalized()
     {
         return (float) health / maxHealth;
+    }
+
+    public void MakeInvinsibleForTime(float time)
+    {
+        isInvincible = true;
+        FunctionTimer.Create(() =>
+        {
+            isInvincible = false;
+        }, time);
     }
 }

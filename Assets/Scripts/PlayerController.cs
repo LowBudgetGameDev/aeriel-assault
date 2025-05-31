@@ -3,10 +3,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private Transform bulletPrefab;
+    [SerializeField] private Transform bombPrefab;
+
+    private Transform projectilePrefab;
 
     private float movementSpeed = 10f;
     private float turnSpeed = 180f;
     private int damage = 250;
+
+    private void Awake()
+    {
+        projectilePrefab = bombPrefab;
+    }
 
     private void Update()
     {
@@ -24,8 +32,17 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
-        Transform bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
+        Transform projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
-        bullet.GetComponent<Bullet>().Setup(transform.up, damage);
+        projectile.GetComponent<Bullet>().Setup(transform.up, damage, projectilePrefab == bombPrefab);
+    }
+
+    public void ToggleBombsForTime(float time)
+    {
+        projectilePrefab = bombPrefab;
+        FunctionTimer.Create(() =>
+        {
+            projectilePrefab = bulletPrefab;
+        }, time);
     }
 }
