@@ -46,15 +46,15 @@ public class EnemyController : MonoBehaviour
     {
         if (playerTransform == null) return;
 
-        if (Vector3.Distance(transform.position, playerTransform.position) > targetRange)
-        {
-            MoveToPlayer();
-            return;
-        }
-
         if (targetTimer > targetTime)
         {
             FlyAway();
+            return;
+        }
+
+        if (Vector3.Distance(transform.position, playerTransform.position) > targetRange)
+        {
+            MoveToPlayer();
             return;
         }
 

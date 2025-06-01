@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1018681295511125147}
   - component: {fileID: 6832280524221681631}
   - component: {fileID: -5794208944382851999}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PowerupInvincible
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8971586945721609219}
   - component: {fileID: 4679544091703762733}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -17,17 +17,24 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float chanceUpdateTime = 15f;
     [SerializeField] private float equalizingTime = 180f;
 
+    [Header("Powerup Info")]
+    [SerializeField] private Transform[] powerupPrefabs;
+    [SerializeField] private float powerupSpawnTime = 5f;
+
     private float[] spawnChances;
     private float spawnTimer;
 
     private float waveTimer;
     private int wave;
 
+    private float powerupTimer;
+
     private Vector2 halfCameraSize;
 
     private void Awake()
     {
         waveTimer = chanceUpdateTime;
+        powerupTimer = powerupSpawnTime;
 
         Camera mainCamera = UtilsClass.GetMainCamera();
         halfCameraSize = new Vector2(
@@ -54,6 +61,14 @@ public class WaveManager : MonoBehaviour
             wave++;
             UpdateSpawnChances();
             waveTimer = chanceUpdateTime;
+        }
+
+        powerupTimer -= Time.deltaTime;
+
+        if (powerupTimer < 0f)
+        {
+            SpawnPowerup();
+            powerupTimer = powerupSpawnTime;
         }
     }
 
@@ -90,6 +105,17 @@ public class WaveManager : MonoBehaviour
         Transform enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
 
         enemy.GetComponent<EnemyController>().Setup(playerTransform);
+    }
+
+    private void SpawnPowerup()
+    {
+        int randomIndex = Random.Range(0, powerupPrefabs.Length);
+
+        Transform powerupPrefab = powerupPrefabs[randomIndex];
+
+        Vector3 spawnPosition = new Vector3(Random.Range(-halfSpawnSize.x, halfSpawnSize.x), Random.Range(-halfSpawnSize.y, halfSpawnSize.y));
+
+        Transform powerup = Instantiate(powerupPrefab, spawnPosition, Quaternion.identity);
     }
 
     private void UpdateSpawnChances()
