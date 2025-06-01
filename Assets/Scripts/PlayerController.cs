@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        projectilePrefab = bombPrefab;
+        projectilePrefab = bulletPrefab;
     }
 
     private void Update()

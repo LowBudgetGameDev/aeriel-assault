@@ -4,6 +4,7 @@ using UnityEngine;
 public class HealthSystem : MonoBehaviour
 {
     public event EventHandler OnDie;
+    public event EventHandler OnHealthAmountChanged;
 
     [SerializeField] private int maxHealth = 1000;
 
@@ -22,6 +23,8 @@ public class HealthSystem : MonoBehaviour
         health -= amount;
         health = Mathf.Clamp(health, 0, maxHealth);
 
+        OnHealthAmountChanged?.Invoke(this, EventArgs.Empty);
+
         if (health == 0)
         {
             Die();
@@ -32,6 +35,8 @@ public class HealthSystem : MonoBehaviour
     {
         health += amount;
         health = Mathf.Clamp(health, 0, maxHealth);
+
+        OnHealthAmountChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public void Die()
