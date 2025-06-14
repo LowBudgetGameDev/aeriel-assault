@@ -1,0 +1,54 @@
+using System;
+using UnityEngine;
+
+public class LeaveManager : MonoBehaviour
+{
+    public static LeaveManager Instance { get; private set; }
+
+    public event EventHandler OnLeaveMap;
+    public event EventHandler OnEnterMap;
+
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private float maxDistance;
+
+    private bool inMap;
+
+    private float leaveTimerMax = 5f;
+    private float leaveTimer;
+
+    private void Awake()
+    {
+        Instance = this;
+        inMap = true;
+    }
+
+    private void Update()
+    {
+        if (playerTransform.position.magnitude > maxDistance && inMap)
+        {
+            inMap = false;
+            leaveTimer = leaveTimerMax;
+            OnLeaveMap?.Invoke(this, EventArgs.Empty);
+        }
+
+        if (playerTransform.position.magnitude <= maxDistance && !inMap)
+        {
+            inMap = true;
+            OnEnterMap?.Invoke(this, EventArgs.Empty);
+        }
+
+        if (inMap) return;
+
+        leaveTimer -= Time.deltaTime;
+
+        if (leaveTimer < 0f)
+        {
+            playerTransform.GetComponent<HealthSystem>().Damage(10000);
+        }
+    }
+
+    public float GetLeaveTimer()
+    {
+        return leaveTimer;
+    }
+}
