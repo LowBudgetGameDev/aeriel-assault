@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class HealthUI : MonoBehaviour
 {
-    [SerializeField] private Transform playerTransform;
     [SerializeField] private Transform barRedTransform;
 
     private HealthSystem playerHealthSystem;
 
-    private void Awake()
+    private void Start()
     {
-        playerHealthSystem = playerTransform.GetComponent<HealthSystem>();
+        playerHealthSystem = GameManager.Instance.GetPlayerTransform().GetComponent<HealthSystem>();
 
         playerHealthSystem.OnHealthAmountChanged += (object sender, EventArgs e) =>
         {

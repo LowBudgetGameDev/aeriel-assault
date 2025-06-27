@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    [Header("Player")]
-    [SerializeField] private Transform playerTransform;
-
     [Header("Enemy Info")]
     [SerializeField] private Transform[] enemyPrefabs; // 0 - Normal, 1 - Fast, 2 - Strong
     [SerializeField] private float[] initSpawnChances;
@@ -21,6 +18,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private Transform[] powerupPrefabs;
     [SerializeField] private float powerupSpawnTime = 5f;
 
+    private Transform playerTransform;
+
     private float[] spawnChances;
     private float spawnTimer;
 
@@ -33,6 +32,8 @@ public class WaveManager : MonoBehaviour
 
     private void Awake()
     {
+        playerTransform = GameManager.Instance.GetPlayerTransform();
+
         waveTimer = chanceUpdateTime;
         powerupTimer = powerupSpawnTime;
 

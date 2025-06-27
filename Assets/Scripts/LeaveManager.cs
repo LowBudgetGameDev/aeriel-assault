@@ -8,8 +8,9 @@ public class LeaveManager : MonoBehaviour
     public event EventHandler OnLeaveMap;
     public event EventHandler OnEnterMap;
 
-    [SerializeField] private Transform playerTransform;
     [SerializeField] private float maxDistance;
+
+    private Transform playerTransform;
 
     private bool inMap;
 
@@ -20,6 +21,8 @@ public class LeaveManager : MonoBehaviour
     {
         Instance = this;
         inMap = true;
+
+        playerTransform = GameManager.Instance.GetPlayerTransform();
     }
 
     private void Update()
