@@ -27,6 +27,8 @@ public class LeaveManager : MonoBehaviour
 
     private void Update()
     {
+        if (playerTransform == null) return;
+
         if (playerTransform.position.magnitude > maxDistance && inMap)
         {
             inMap = false;

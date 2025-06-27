@@ -44,7 +44,11 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if (playerTransform == null) return;
+        if (playerTransform == null)
+        {
+            FlyAway();
+            return;
+        }
 
         if (targetTimer > targetTime)
         {

@@ -47,6 +47,8 @@ public class WaveManager : MonoBehaviour
 
     private void Update()
     {
+        if (playerTransform == null) return;
+
         spawnTimer -= Time.deltaTime;
 
         if (spawnTimer < 0f)
