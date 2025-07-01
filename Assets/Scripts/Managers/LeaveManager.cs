@@ -34,12 +34,14 @@ public class LeaveManager : MonoBehaviour
             inMap = false;
             leaveTimer = leaveTimerMax;
             OnLeaveMap?.Invoke(this, EventArgs.Empty);
+            SoundManager.Instance.PlayStoppableSound(SoundManager.Sound.Warning);
         }
 
         if (playerTransform.position.magnitude <= maxDistance && !inMap)
         {
             inMap = true;
             OnEnterMap?.Invoke(this, EventArgs.Empty);
+            SoundManager.Instance.StopStoppableSound(SoundManager.Sound.Warning);
         }
 
         if (inMap) return;

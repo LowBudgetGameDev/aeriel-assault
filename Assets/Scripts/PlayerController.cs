@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
         Transform projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
         projectile.GetComponent<Bullet>().Setup(transform.up, damage, projectilePrefab == bombPrefab);
+        SoundManager.Instance.PlaySoundType(SoundManager.SoundType.Shoot);
     }
 
     public void ToggleBombsForTime(float time)

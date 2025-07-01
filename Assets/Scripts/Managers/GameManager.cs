@@ -26,7 +26,14 @@ public class GameManager : MonoBehaviour
         {
             gameState = GameState.GameOver;
             OnGameStateChanged?.Invoke(this, EventArgs.Empty);
+            SoundManager.Instance.PlaySound(SoundManager.Sound.Lose);
+            SoundManager.Instance.StopStoppableSound(SoundManager.Sound.Fly);
         };
+    }
+
+    private void Start()
+    {
+        SoundManager.Instance.PlayStoppableSound(SoundManager.Sound.Fly, true);
     }
 
     private void Update()

@@ -24,6 +24,7 @@ public class HealthSystem : MonoBehaviour
         health = Mathf.Clamp(health, 0, maxHealth);
 
         OnHealthAmountChanged?.Invoke(this, EventArgs.Empty);
+        SoundManager.Instance.PlaySoundType(SoundManager.SoundType.Hit);
 
         if (health == 0)
         {
@@ -42,6 +43,7 @@ public class HealthSystem : MonoBehaviour
     public void Die()
     {
         OnDie(this, EventArgs.Empty);
+        SoundManager.Instance.PlaySoundType(SoundManager.SoundType.Die);
         Destroy(gameObject);
     }
 

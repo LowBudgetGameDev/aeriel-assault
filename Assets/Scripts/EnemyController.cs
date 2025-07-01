@@ -116,6 +116,7 @@ public class EnemyController : MonoBehaviour
         Transform bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
         bullet.GetComponent<Bullet>().Setup(transform.up, damage);
+        SoundManager.Instance.PlaySoundType(SoundManager.SoundType.Shoot);
     }
 
     private void FlyAway()
