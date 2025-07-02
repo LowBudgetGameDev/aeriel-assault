@@ -26,7 +26,7 @@ public class ObjectDropShadow : MonoBehaviour
         shadowTransform.localScale = spriteRenderer.transform.localScale;
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         shadowTransform.position = transform.position + new Vector3(offset.x, offset.y, 0f);
     }
