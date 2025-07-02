@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    [SerializeField] private Transform hitParticle;
+    [SerializeField] private Transform explodeParticle;
+
     private new Rigidbody2D rigidbody2D;
 
     private float speed = 20f;
@@ -31,6 +34,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out HealthSystem healthSystem))
         {
             healthSystem.Damage(damageAmount);
+            Destroy(Instantiate(hitParticle, transform.position, Quaternion.identity).gameObject, 0.15f);
         }
 
         if (isBomb)
@@ -38,6 +42,7 @@ public class Bullet : MonoBehaviour
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, explosionRadius);
 
             SoundManager.Instance.PlaySoundType(SoundManager.SoundType.Explode);
+            Destroy(Instantiate(explodeParticle, transform.position, Quaternion.identity).gameObject, 0.2f);
 
             foreach (Collider2D collider in colliders)
             {
