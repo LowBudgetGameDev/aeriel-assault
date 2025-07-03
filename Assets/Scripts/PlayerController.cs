@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
         projectile.GetComponent<Bullet>().Setup(transform.up, damage, projectilePrefab == bombPrefab);
         SoundManager.Instance.PlaySoundType(SoundManager.SoundType.Shoot);
+        CinemachineShake.Instance.ShakeCamera(1f, 0.1f);
     }
 
     public void ToggleBombsForTime(float time)

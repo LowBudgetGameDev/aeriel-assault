@@ -35,6 +35,7 @@ public class Bullet : MonoBehaviour
         {
             healthSystem.Damage(damageAmount);
             Destroy(Instantiate(hitParticle, transform.position, Quaternion.identity).gameObject, 0.15f);
+            CinemachineShake.Instance.ShakeCamera(0.5f, 0.1f);
         }
 
         if (isBomb)
@@ -43,6 +44,7 @@ public class Bullet : MonoBehaviour
 
             SoundManager.Instance.PlaySoundType(SoundManager.SoundType.Explode);
             Destroy(Instantiate(explodeParticle, transform.position, Quaternion.identity).gameObject, 0.2f);
+            CinemachineShake.Instance.ShakeCamera(5f, 0.2f);
 
             foreach (Collider2D collider in colliders)
             {

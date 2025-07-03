@@ -119,6 +119,7 @@ public class EnemyController : MonoBehaviour
 
         bullet.GetComponent<Bullet>().Setup(transform.up, damage);
         SoundManager.Instance.PlaySoundType(SoundManager.SoundType.Shoot);
+        CinemachineShake.Instance.ShakeCamera(1f, 0.1f);
     }
 
     private void FlyAway()
