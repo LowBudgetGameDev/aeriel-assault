@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P) && gameState != GameState.GameOver)
         {
             gameState = gameState != GameState.Paused ? GameState.Paused : GameState.Playing;
             OnGameStateChanged?.Invoke(this, EventArgs.Empty);

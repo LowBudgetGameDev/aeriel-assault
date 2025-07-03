@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 public class SoundManager : MonoBehaviour
@@ -39,6 +40,8 @@ public class SoundManager : MonoBehaviour
     }
 
     public static SoundManager Instance { get; private set; }
+
+    [SerializeField] private AudioMixerGroup audioMixerGroup;
 
     private AudioSource audioSource;
 
@@ -117,6 +120,7 @@ public class SoundManager : MonoBehaviour
         source.resource = soundClip;
         source.volume = volume;
         source.loop = loop;
+        source.outputAudioMixerGroup = audioMixerGroup;
 
         source.Play();
 
