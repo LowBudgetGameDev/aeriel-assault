@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
     {
         Instance = this;
 
+        gameState = GameState.Playing;
+
         playerTransform.GetComponent<HealthSystem>().OnDie += (object sender, EventArgs e) =>
         {
             gameState = GameState.GameOver;

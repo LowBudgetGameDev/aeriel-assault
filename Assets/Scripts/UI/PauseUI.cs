@@ -22,35 +22,37 @@ public class PauseUI : MonoBehaviour
             if (GameManager.Instance.GetCurrentState() == GameManager.GameState.Paused)
             {
                 Show();
+                SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonPress);
             }
             else
             {
                 Hide();
+                if (GameManager.Instance.GetCurrentState() == GameManager.GameState.Playing) SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonPress);
             }
         };
 
         musicVolumeDownButton.onClick.AddListener(() =>
         {
-            VolumeManager.Instance.ChangeMusicVolume(-1);
-            musicVolumeText.SetText(VolumeManager.Instance.GetMusicVolume().ToString());
+            AudioManager.Instance.ChangeMusicVolume(-1);
+            musicVolumeText.SetText(AudioManager.Instance.GetMusicVolume().ToString());
         });
 
         musicVolumeUpButton.onClick.AddListener(() =>
         {
-            VolumeManager.Instance.ChangeMusicVolume(1);
-            musicVolumeText.SetText(VolumeManager.Instance.GetMusicVolume().ToString());
+            AudioManager.Instance.ChangeMusicVolume(1);
+            musicVolumeText.SetText(AudioManager.Instance.GetMusicVolume().ToString());
         });
 
         soundVolumeDownButton.onClick.AddListener(() =>
         {
-            VolumeManager.Instance.ChangeSoundVolume(-1);
-            soundVolumeText.SetText(VolumeManager.Instance.GetSoundVolume().ToString());
+            AudioManager.Instance.ChangeSoundVolume(-1);
+            soundVolumeText.SetText(AudioManager.Instance.GetSoundVolume().ToString());
         });
 
         soundVolumeUpButton.onClick.AddListener(() =>
         {
-            VolumeManager.Instance.ChangeSoundVolume(1);
-            soundVolumeText.SetText(VolumeManager.Instance.GetSoundVolume().ToString());
+            AudioManager.Instance.ChangeSoundVolume(1);
+            soundVolumeText.SetText(AudioManager.Instance.GetSoundVolume().ToString());
         });
 
         Hide();
@@ -60,14 +62,17 @@ public class PauseUI : MonoBehaviour
     {
         gameObject.SetActive(true);
 
-        soundVolumeText.SetText(VolumeManager.Instance.GetSoundVolume().ToString());
-        musicVolumeText.SetText(VolumeManager.Instance.GetMusicVolume().ToString());
+        soundVolumeText.SetText(AudioManager.Instance.GetSoundVolume().ToString());
+        musicVolumeText.SetText(AudioManager.Instance.GetMusicVolume().ToString());
         Time.timeScale = 0f;
+
+        AudioManager.Instance.SetLowpass(5000);
     }
 
     private void Hide()
     {
         gameObject.SetActive(false);
         Time.timeScale = 1f;
+        if (GameManager.Instance.GetCurrentState() != GameManager.GameState.GameOver) AudioManager.Instance.SetLowpass();
     }
 }

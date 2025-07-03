@@ -30,10 +30,12 @@ public class GameOverUI : MonoBehaviour
     private void Show()
     {
         gameObject.SetActive(true);
+        AudioManager.Instance.SetLowpass(2000);
     }
 
     private void Hide()
     {
         gameObject.SetActive(false);
+        AudioManager.Instance.SetLowpass();
     }
 }

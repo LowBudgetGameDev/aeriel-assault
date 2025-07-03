@@ -113,6 +113,8 @@ public class EnemyController : MonoBehaviour
 
     private void Shoot()
     {
+        if (Time.timeScale == 0f) return;
+
         Transform bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity);
 
         bullet.GetComponent<Bullet>().Setup(transform.up, damage);

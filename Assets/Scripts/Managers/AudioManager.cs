@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class VolumeManager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
-    public static VolumeManager Instance { get; private set; }
+    public static AudioManager Instance { get; private set; }
 
     [SerializeField] private AudioMixer audioMixer;
 
@@ -43,6 +43,11 @@ public class VolumeManager : MonoBehaviour
         audioMixer.SetFloat("MusicVolume", VolumeToGain(musicVolume));
 
         PlayerPrefs.SetInt("MusicVolume", musicVolume);
+    }
+
+    public void SetLowpass(float cutoff = 22000f)
+    {
+        audioMixer.SetFloat("Lowpass", cutoff);
     }
 
     public int GetSoundVolume()

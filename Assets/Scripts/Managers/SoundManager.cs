@@ -122,6 +122,20 @@ public class SoundManager : MonoBehaviour
         source.loop = loop;
         source.outputAudioMixerGroup = audioMixerGroup;
 
+        GameManager.Instance.OnGameStateChanged += (object sender, EventArgs e) =>
+        {
+            if (source == null) return;
+
+            if (GameManager.Instance.GetCurrentState() == GameManager.GameState.Paused)
+            {
+                source.Pause();
+            }
+            else
+            {
+                source.UnPause();
+            }
+        };
+
         source.Play();
 
         stoppableSoundObjectDictionary[soundClip] = stoppableSoundObject;

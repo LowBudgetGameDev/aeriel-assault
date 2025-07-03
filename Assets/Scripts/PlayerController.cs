@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
     private void Shoot()
     {
+        if (Time.timeScale == 0f) return;
+
         Transform projectile = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
 
         projectile.GetComponent<Bullet>().Setup(transform.up, damage, projectilePrefab == bombPrefab);
