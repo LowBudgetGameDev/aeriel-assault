@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class ObjectDropShadow : MonoBehaviour
@@ -24,6 +25,12 @@ public class ObjectDropShadow : MonoBehaviour
 
         shadowTransform.localPosition = new Vector3(offset.x, offset.y, 0f);
         shadowTransform.localScale = spriteRenderer.transform.localScale;
+
+        GetComponent<HealthSystem>().OnDie += (object sender, EventArgs e) =>
+        {
+            Destroy(shadowTransform.gameObject);
+            Destroy(this);
+        };
     }
 
     private void LateUpdate()

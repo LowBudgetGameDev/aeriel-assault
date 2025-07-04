@@ -40,6 +40,11 @@ public class EnemyController : MonoBehaviour
     private void Awake()
     {
         flyAwayDir = UtilsClass.RandomUnitVector();
+
+        GetComponent<HealthSystem>().OnDie += (object sender, EventArgs e) =>
+        {
+            Destroy(this);
+        };
     }
 
     private void Update()

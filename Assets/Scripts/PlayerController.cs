@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -14,6 +15,11 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         projectilePrefab = bulletPrefab;
+
+        GetComponent<HealthSystem>().OnDie += (object sender, EventArgs e) =>
+        {
+            Destroy(this);
+        };
     }
 
     private void Update()

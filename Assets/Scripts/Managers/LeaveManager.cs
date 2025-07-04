@@ -1,4 +1,5 @@
 using System;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 public class LeaveManager : MonoBehaviour
@@ -46,9 +47,11 @@ public class LeaveManager : MonoBehaviour
 
         if (inMap) return;
 
+        if (leaveTimer <= 0f) return;
+
         leaveTimer -= Time.deltaTime;
 
-        if (leaveTimer < 0f)
+        if (leaveTimer <= 0f)
         {
             playerTransform.GetComponent<HealthSystem>().Damage(10000);
         }

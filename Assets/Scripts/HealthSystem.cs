@@ -43,8 +43,17 @@ public class HealthSystem : MonoBehaviour
     public void Die()
     {
         OnDie(this, EventArgs.Empty);
+
+        GetComponent<Animator>().SetTrigger("Die");
+
+        FunctionTimer.Create(() =>
+        {
+            SoundManager.Instance.PlaySoundType(SoundManager.SoundType.Hit);
+        }, 2f);
+
         SoundManager.Instance.PlaySoundType(SoundManager.SoundType.Die);
-        Destroy(gameObject);
+        Destroy(this);
+        Destroy(gameObject, 2f);
     }
 
     public float GetHealthAmountNormalized()
