@@ -7,6 +7,11 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     [SerializeField] private TextMeshProUGUI textMeshPro;
     [SerializeField] private string defaultText;
 
+    private void OnDisable()
+    {
+        textMeshPro.SetText(defaultText);
+    }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         SoundManager.Instance.PlaySound(SoundManager.Sound.ButtonSelect);
