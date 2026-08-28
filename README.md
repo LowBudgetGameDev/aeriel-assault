@@ -5,3 +5,5 @@ This game is the first of a collection where each game is focussed on a latter o
 This game is for the letter "A" and I made the game about ***A**irplanes*.
 
 **Built With:** Unity + C#
+
+**Asset Attributions on [itch.io](https://lowbudgetgamedev.itch.io/aerial-assault)**
